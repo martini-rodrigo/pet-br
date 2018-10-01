@@ -1,4 +1,4 @@
-package br.com.pet.petbr;
+package br.com.pet;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
