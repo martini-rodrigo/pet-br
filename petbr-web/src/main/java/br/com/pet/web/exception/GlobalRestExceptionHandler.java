@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class ResponseExceptionHandler {
+public class GlobalRestExceptionHandler {
 
     @ExceptionHandler(value = BadCredentialsException.class)
     public ResponseEntity<Object> exception(BadCredentialsException exception) {

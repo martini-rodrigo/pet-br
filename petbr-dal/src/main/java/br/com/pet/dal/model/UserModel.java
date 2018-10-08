@@ -23,12 +23,12 @@ public class UserModel {
     private @NonNull String userId;
 
     /** The name user. */
-    private @NonNull String          name;
+    private @NonNull String name;
 
     /** The username. */
-    private @NonNull String          username;
+    private @NonNull String username;
 
     /** The password. */
-    private @NonNull String          password;
+    private @NonNull String password;
 
 }
