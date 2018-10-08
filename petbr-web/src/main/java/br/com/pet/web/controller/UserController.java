@@ -9,12 +9,12 @@ package br.com.pet.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pet.business.security.UserSecurity;
-import br.com.pet.business.service.UserService;
 
 
 @RestController
@@ -27,8 +27,8 @@ public class UserController {
      * @return authenticated user
      */
     @GetMapping("/authenticated")
-    public ResponseEntity<?> getAuthenticated() {
+    public ResponseEntity<?> getAuthenticated(@AuthenticationPrincipal final UserSecurity user) {
         
-        return new ResponseEntity<UserSecurity>(UserService.authenticated(), HttpStatus.OK);
+        return new ResponseEntity<UserSecurity>(user, HttpStatus.OK);
     }
 }
