@@ -12,14 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.pet.business.service.UserService;
-
 @RestController
 public class HomeController {
 
     @GetMapping("/home")
     public ResponseEntity<?> home() throws Exception {
 
-        return new ResponseEntity<String>("Welcome " + UserService.authenticated().getUsername(), HttpStatus.OK);
+        return new ResponseEntity<String>("WELCOME", HttpStatus.OK);
     }
 }
