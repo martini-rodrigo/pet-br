@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,13 +32,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import br.com.pet.web.filter.NoRedirectStrategy;
-import br.com.pet.web.filter.TokenAuthenticationFilter;
-import br.com.pet.web.filter.TokenAuthenticationProvider;
+import br.com.pet.web.security.NoRedirectStrategy;
+import br.com.pet.web.security.TokenAuthenticationFilter;
+import br.com.pet.web.security.TokenAuthenticationProvider;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     
@@ -77,15 +75,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         
         // No session will be created by Spring Security
         .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        
+        // If a user try to access a resource without having enough permissions
         .and()
         .exceptionHandling()
         
-         // This entry point handles when you request a protected page and you are not yet authenticated
+        // This entry point handles when you request a protected page and you are not yet authenticated
         .defaultAuthenticationEntryPointFor(forbiddenEntryPoint(), PROTECTED_URLS)
         .and()
         .authenticationProvider(tokenAuthenticationProvider)
+        // Add custom JWT security filter to capture any authentication token
         .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter.class)
         .authorizeRequests()
         .requestMatchers(PROTECTED_URLS)

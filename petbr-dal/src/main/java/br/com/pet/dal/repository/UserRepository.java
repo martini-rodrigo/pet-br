@@ -22,4 +22,7 @@ public interface UserRepository extends MongoRepository<UserModel, String> {
     
     @Transactional(readOnly = true)
     Optional<UserModel> findByUsernameAndPassword(String username, String password);
+    
+    @Transactional(readOnly = true)
+    Optional<UserModel> findByUserId(String userId);
 }

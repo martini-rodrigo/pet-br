@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.ImmutableMap;
 
 import br.com.pet.business.param.AuthParam;
-import br.com.pet.business.security.UserSSecurity;
+import br.com.pet.business.security.UserSecurity;
 import br.com.pet.dal.repository.UserRepository;
 
 @Service
@@ -35,7 +35,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService{
     }
 
     @Override
-    public void logout(UserSSecurity user) {
+    public void logout(UserSecurity user) {
         // TODO Auto-generated method stub
     }
 

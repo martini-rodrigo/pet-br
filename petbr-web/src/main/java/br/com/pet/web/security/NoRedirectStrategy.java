@@ -4,7 +4,7 @@
 * It's content can not be copied and/or distributed
 * without the express permission
 */
-package br.com.pet.web.filter;
+package br.com.pet.web.security;
 
 import java.io.IOException;
 
@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.web.RedirectStrategy;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class NoRedirectStrategy implements RedirectStrategy {
 
     @Override
     public void sendRedirect(HttpServletRequest request, HttpServletResponse response, String url) throws IOException {
-      System.out.println(url);
+      log.info(url);
     }
 
 }

@@ -9,7 +9,7 @@ package br.com.pet.business.service;
 import java.util.Optional;
 
 import br.com.pet.business.param.AuthParam;
-import br.com.pet.business.security.UserSSecurity;
+import br.com.pet.business.security.UserSecurity;
 
 public interface UserAuthenticationService {
 
@@ -27,5 +27,5 @@ public interface UserAuthenticationService {
      *
      * @param user the user to logout
      */
-    void logout(UserSSecurity user);
+    void logout(UserSecurity user);
 }

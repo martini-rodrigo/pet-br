@@ -6,32 +6,29 @@
 */
 package br.com.pet.dal.model;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
 @Data
+@Builder
 @Document(collection = "user")
 public class UserModel {
 
     /** The user id. */
     @Id
-    private String                userId;
+    private @NonNull String userId;
 
     /** The name user. */
-    private @NonNull String       name;
+    private @NonNull String          name;
 
     /** The username. */
-    private @NonNull String       username;
+    private @NonNull String          username;
 
     /** The password. */
-    private @NonNull String       password;
-
-    /** The profiles. */
-    private @NonNull List<String> profiles;
+    private @NonNull String          password;
 
 }

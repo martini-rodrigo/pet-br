@@ -4,7 +4,7 @@
 * It's content can not be copied and/or distributed
 * without the express permission
 */
-package br.com.pet.web.filter;
+package br.com.pet.web.security;
 
 import java.util.Optional;
 

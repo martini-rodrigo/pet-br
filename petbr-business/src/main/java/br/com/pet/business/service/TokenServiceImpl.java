@@ -7,6 +7,7 @@
 package br.com.pet.business.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -14,10 +15,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.compression.GzipCompressionCodec;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class TokenServiceImpl implements TokenService {
 
@@ -52,18 +59,27 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public Map<String, String> verify(String token) {
         
-        // Decrypt claim
-        Claims claims = Jwts.parser()
-                .setSigningKey(secret.getBytes())
-                .parseClaimsJws(token)
-                .getBody();
-        
-        return claims
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(claim -> claim.getKey(), claim -> String.valueOf(claim.getValue())));
+        Map<String, String>  attributes = new HashMap<>();
+        try {
+            
+            // Decrypt claim
+            attributes = Jwts.parser()
+                    .setSigningKey(secret.getBytes())
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .entrySet().stream()
+                    .collect(Collectors.toMap(claim -> claim.getKey(), claim -> String.valueOf(claim.getValue())));
 
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } 
+        return attributes;
     }
-
 
 }

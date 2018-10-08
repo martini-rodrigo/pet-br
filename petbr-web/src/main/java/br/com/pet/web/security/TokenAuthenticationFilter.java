@@ -4,7 +4,7 @@
 * It's content can not be copied and/or distributed
 * without the express permission
 */
-package br.com.pet.web.filter;
+package br.com.pet.web.security;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -42,7 +42,8 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
      * Filter for token validation of header
      */
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, 
+            HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
         // Get token of header
@@ -56,7 +57,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
     }
 
     /**
-     * Successful authentication
+     * Continues request normally if authentication successful
      */
     @Override
     protected void successfulAuthentication(

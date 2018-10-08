@@ -16,11 +16,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Value;
 
+/**
+ * 
+ * @author rodrigo
+ * 
+ * Spring Security will use the information stored in the UserPrincipal object to perform authentication and authorization
+ *
+ */
 // Create immutable objects
 @Value
 // Object Creation pattern
 @Builder
-public class UserSSecurity implements UserDetails {
+public class UserSecurity implements UserDetails {
 
     /** The Constant serialVersionUID. */
     private static final long                      serialVersionUID = -8986728347833642033L;

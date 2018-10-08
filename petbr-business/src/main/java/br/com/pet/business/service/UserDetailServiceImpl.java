@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.pet.business.security.UserSSecurity;
+import br.com.pet.business.security.UserSecurity;
 import br.com.pet.dal.model.UserModel;
 import br.com.pet.dal.repository.UserRepository;
 
@@ -41,7 +41,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found."));
        
         // Create security user
-        return UserSSecurity.builder()
+        return UserSecurity.builder()
                 .id(model.getUserId())
                 .username(model.getUsername())
                 .password(model.getPassword())
