@@ -30,7 +30,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
 
     /** Constants Authorization. */
     private static final String AUTHORIZATION = "Authorization";
-
+    
     /**
      * Constructor
      */
@@ -51,7 +51,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
                 .map(String::trim)
                 .orElseThrow(() -> new BadCredentialsException("Missing Authentication Token"));
 
-        // Authentication user with token
+        // Authentication user with token in TokenAuthenticationProvider
         Authentication auth = new UsernamePasswordAuthenticationToken(token, token);
         return getAuthenticationManager().authenticate(auth);
     }

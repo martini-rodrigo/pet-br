@@ -10,6 +10,7 @@ package br.com.pet.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +39,7 @@ public class AuthController {
     public ResponseEntity<?> authenticate(@RequestBody AuthParam param) throws Exception {
 
         return new ResponseEntity<String>(userAuthenticationService.login(param)
-                .orElseThrow(() -> new RuntimeException("invalid login and/or password")), HttpStatus.OK);
+                .orElseThrow(() -> new BadCredentialsException("invalid login and/or password")), HttpStatus.OK);
     }
     
     /**
