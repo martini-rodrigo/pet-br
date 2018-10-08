@@ -25,6 +25,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @AuthenticationPrincipal
-public @interface LoggedUser {
+public @interface AuthenticatedUser {
 
 }

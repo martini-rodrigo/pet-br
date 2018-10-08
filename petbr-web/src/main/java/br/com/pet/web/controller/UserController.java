@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pet.business.security.UserSecurity;
-import br.com.pet.web.security.LoggedUser;
+import br.com.pet.web.security.AuthenticatedUser;
 
 
 @RestController
@@ -27,7 +27,7 @@ public class UserController {
      * @return authenticated user
      */
     @GetMapping("/authenticated")
-    public ResponseEntity<?> getAuthenticated(@LoggedUser final UserSecurity user) {
+    public ResponseEntity<?> getAuthenticated(@AuthenticatedUser final UserSecurity user) {
         
         return new ResponseEntity<UserSecurity>(user, HttpStatus.OK);
     }
