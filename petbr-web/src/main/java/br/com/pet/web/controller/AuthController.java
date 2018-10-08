@@ -10,7 +10,6 @@ package br.com.pet.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.pet.business.param.AuthParam;
 import br.com.pet.business.security.UserSecurity;
 import br.com.pet.business.service.UserAuthenticationService;
+import br.com.pet.web.security.LoggedUser;
 
 @RestController
 public class AuthController {
@@ -47,7 +47,7 @@ public class AuthController {
      * @return success
      */
     @GetMapping("/logout")
-    public ResponseEntity<?> logout(@AuthenticationPrincipal final UserSecurity user) {
+    public ResponseEntity<?> logout(@LoggedUser final UserSecurity user) {
         
         // Logout
         userAuthenticationService.logout(user);
